@@ -1,0 +1,14 @@
+\begin{circuitikz}[scale=0.8, transform shape, european, straight voltages] 
+\ctikzset{inductor=cute}
+
+%\draw [help lines] (0,0) grid (7,5);
+
+\draw (0,0) to [open, o-o, v^>=Input] ++ (0,2)-- ++(1,0) to [L, l=$L_1$, a=1.5<\milli\henry>] ++ (2,0) -- ++(2,0)
+to [loudspeaker,l=Woofer, v=$ $, voltage=american] ++ (0,-2) -- (0,0);
+\draw (3,0) [C, l=$C_1$, a = 2.7<\nano\farad>] to ++(0,2);
+
+\draw (1,0) to [short,*-] ++(0,1) to [crossing] ++(0,2) -- ++(4,0)
+to [loudspeaker,mirror,l_=Tweeter, v=$ $, voltage=american] ++(0,2) --  ++(-2,0) to[C, l_=$C_2$, a^= 10<\nano\farad>] ++(-2,0) -- ++(-0.5,0)
+to [short, -*] ++(0,-3);
+\draw (3,3) [L, l=$L_2$, a = 0.33<\milli\henry>] to ++ (0,2);
+\end{circuitikz}

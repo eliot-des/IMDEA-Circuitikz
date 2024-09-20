@@ -1,0 +1,37 @@
+\begin{circuitikz}[scale=0.82, transform shape, european, straight voltages] 
+\ctikzset{inductor=cute}
+%\draw [help lines] (0,0) grid (8,2);
+\definecolor{mygreen}{RGB}{0, 153, 76}
+%------------coupling element------------
+%-----------------------------------------
+\draw (3,1) node[gyrator] (G) {$Bl$:1}
+(G.A1) node[anchor=east] {}
+(G.A2) node[anchor=east] {}
+(G.B1) node[anchor=west] {}
+(G.B2) node[anchor=west] {}
+(G.base) node{};
+%-----------------------------------------
+%-----------------------------------------
+
+
+%electrical domain
+\draw (0,0) to[open, v^>=$U$, o-o] ++(0,2)
+ to [R,l=$Z_{ec}$,-*,i>^=$i$] (G.A1);
+\draw (G.A2) to [short, *-o] (0,0);
+
+\draw (G.A1) to[open, v=$Blv$] (G.A2);
+
+
+%mechanical domain
+\draw (G.B1) to [R, l=$Z_{mm}$, i>^=$v$, *-*]  ++(2,0)
+             to [R, l=$Z_{mf}$ ]              ++(2,0)
+             to [short]                     ++(0,-2)
+             to [R, l=$Z_{mr}$] ++(-2,0)
+             to [short, *-*](G.B2);
+\draw (G.B1) to[open, v^=$Bli$] (G.B2);             
+\draw (8,1) to [short,-] ++(0.5,0) node[ground]{};
+
+
+\draw[thick, mygreen!90] (3.75,-0.8) rectangle (7.75, 2.8);
+\node[align=center,text=mygreen!90] at (8.35,2.4){\textbf{$Z_{ms}$}};
+\end{circuitikz}

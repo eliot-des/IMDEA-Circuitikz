@@ -1,0 +1,44 @@
+\begin{circuitikz}[scale=0.9, transform shape, european, straight voltages] 
+\ctikzset{inductor=cute}
+%\draw [help lines] (0,0) grid (8,2);
+
+%------------coupling elements------------
+%-----------------------------------------
+\draw (3,1) node[gyrator] (G) {$Bl$:1}
+(G.A1) node[anchor=east] {}
+(G.A2) node[anchor=east] {}
+(G.B1) node[anchor=west] {}
+(G.B2) node[anchor=west] {}
+(G.base) node{};
+%-------------------------------------
+\draw (7,1) node[transformer] (T) {$S_d$:1}
+(T.A1) node[anchor=east] {}
+(T.A2) node[anchor=east] {}
+(T.B1) node[anchor=west] {}
+(T.B2) node[anchor=west] {}
+(T.base) node{};
+%-----------------------------------------
+%-----------------------------------------
+
+
+%electrical domain
+\draw (0,0) to[open, v^>=$U$, o-o] ++(0,2)
+ to [R,l=$Z_{ec}$,-*,i>^=$i$] (G.A1);
+\draw (G.A2) to [short, *-o] (0,0);
+
+\draw (G.A1) to[open, v=$Blv$] (G.A2);
+
+
+%mechanical domain
+\draw (G.B1) to [R, l=$Z_{mm}$, i>^=$v$, *-*] (T.A1);
+\draw (G.B2) to [short, *-*] (T.A2);
+
+\draw (G.B1) to[open, v^=$Bli$] (G.B2);
+\draw (T.A1) to[open, v=$F_{air}$] (T.A2);
+
+%acoustic domain
+\draw (T.B1) to [R, l=$Z_{af}$, i>^=$q$, v=$p_f$, *-] ++(2,0)
+             to [short] ++(0,-2)
+             to [R, l=$Z_{ar}$,v>=$p_r$, -*] (T.B2);
+\draw (10,1) to [short,-] ++(0.5,0) node[ground]{};
+\end{circuitikz}

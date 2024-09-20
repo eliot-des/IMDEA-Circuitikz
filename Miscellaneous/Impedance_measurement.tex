@@ -1,0 +1,26 @@
+\begin{circuitikz}[scale=0.85, transform shape, european, straight voltages] 
+%\draw [help lines] (0,0) grid (7,5);
+\draw (0, 4.75) node [bnc](B1){Output}  
+to [amp, boxed,l=Amplifier, i = $i$] ++(4, 0)
+to [short] ++ (0, -1.5)
+to [R, v^<=$U_R$, l_=$R$] ++ (0, -2)
+to [loudspeaker, v^<=$U_{ls}$ ]++ (0, -2) node[tlground]{};
+
+\draw (0, 3.5) node [bnc](B2){Input 1}  -- ++(3, 0) 
+to [crossing] ++(2,0) -| ++(3,-2.25)
+to [mic,mirror,v^<=$U_{mic}$] ++(0,-2) node [tlground]{};
+
+
+\draw (0, 2.25) node [bnc](B2){Input 2}  to [short,-*] ++(3, 0);
+\draw (0, 1) node [bnc](B2){Input 3}  -- ++(1.5,0) --++(0,-0.75) to [short,-*] ++(1.5,0);
+\draw (0, -0.25) node [bnc](B2){Input 4};
+
+\draw (4, 3) [latexslim-] -| (3,2);
+\draw (4, 1.5) [short, o-] -| (3,2);
+\draw (4, 1) [latexslim-] -| (3,0);
+\draw (4, -0.5) [short, o-] -| (3,0);
+\draw(6,0.25) node[waves]{};
+
+\draw[thick] (-1,-0.75) rectangle (0.75, 5.5);
+\node[align=center,text=black] at (-0.125, -1.25){\large{NI-4431}};
+\end{circuitikz}
