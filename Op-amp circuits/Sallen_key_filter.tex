@@ -1,0 +1,13 @@
+\begin{circuitikz}[scale=0.8, transform shape, european, straight voltages]
+    \ctikzset{inductor=cute}
+    \draw(5,.5) node [op amp] (opamp) {}
+    (0,0) node [above] {\circled{1}} to [R, l=$R_1$,a=\SI{4.7}{\kilo\ohm}, *-*] (2,0) node [above left] {\circled{2}}
+    to [R, l=$R_2$,a=\SI{4.7}{\kilo\ohm}, *-*] (opamp.+) node [above] {\circled{3}}
+    to [C, l_=$C_{1}$,a^=\SI{20}{\nano\farad}, *-] ($(opamp.+)+(0,-2)$) node [ground] {}
+    (opamp.out) |- (3.5,2) node[above]{\circled{4}} to [C, l_=$C_{2}$, *-,a^=\SI{33}{\nano\farad},] (2,2) to [short] (2,0)
+    (opamp.-) -| (3.5,2)
+    (opamp.out) to [short,-o] (7,.5);
+    \draw (0,-2) node [ground] {} to [V, v=$V_{in}$] (0,0);
+    \draw (7,-2) node [ground] {} to [open, v_>=$V_{out}$] ++(0,2.5);
+    \draw (7,-2) node [ocirc] {};
+\end{circuitikz}
