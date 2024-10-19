@@ -1,0 +1,62 @@
+\begin{circuitikz}[scale=0.8, transform shape, european, straight voltages] 
+    \ctikzset{inductor=cute}
+    
+    %\draw [help lines] (0,0) grid (15,4);
+    
+    
+    
+    %------------coupling elements------------
+    %-----------------------------------------
+    \draw (3,3) node[transformer] (T1) {1:$S_d$}
+    (T1.A1) node[anchor=east] {}
+    (T1.A2) node[anchor=east] {}
+    (T1.B1) node[anchor=west] {}
+    (T1.B2) node[anchor=west] {}
+    (T1.base) node{};
+    %-------------------------------------
+    \draw (3,1) node[transformer] (T2) {}
+    (T2.A1) node[anchor=east] {}
+    (T2.A2) node[anchor=east] {}
+    (T2.B1) node[anchor=west] {}
+    (T2.B2) node[anchor=west] {}
+    (T2.base) node{};
+    %-----------------------------------------
+    \ctikzset{quadpoles/transformer/inner=1, quadpoles/transformer/width=0.6}
+    %-----------------------------------------
+    \draw (9.5,2) node[transformer] (T3) {$k_b$:1}
+    (T3.A1) node[anchor=east] {}
+    (T3.A2) node[anchor=east] {}
+    (T3.B1) node[anchor=west] {}
+    (T3.B2) node[anchor=west] {}
+    (T3.base) node{};
+    
+    %acoustical domain
+    \draw (T2.A2) to [R, l=$Z_{ab}$, i=$Q$] (0,0) --++(0,2) -- (T1.A2);
+    \draw (0,2) to[vsourcesin, v^>=$P_i$] ++(0,2)
+     to [R,l=$Z_{af}$,-*,i>^=$Q$] ++(2,0) -- (T1.A1);
+    \draw (T1.A1) to [open, v=$P_f$,*-*] (T1.A2);
+    \draw (T2.A1) to [open, v_>=$P_b$,*-*] (T2.A2);
+    \draw (1,2) node [ground]{};
+    
+    
+    %mechanical
+    \draw (T1.B1) to [open, v^<=$F_{f}$,*-*] (T1.B2);
+    \draw (T2.B1) to [open, v^>=$F_b$,*-*] (T2.B2);
+    \draw (T1.B2) node [ground, rotate=90]{};
+    
+    \draw (T1.B1)
+    to [R, l=$R_{mm}$] ++(1.5,0)
+    to [L, l=$M_{mm}$] ++(1.6,0)
+    to [C, l=$C_{mm}$] ++(1.1,0) -| (T3.A1);
+    
+    \draw (T2.B2) --++(1.2,0) to [C, l=-$C_0/k_b^2$] ++(2,0) -| (T3.A2);
+    
+    
+    
+    %electrical
+    \draw (8.5,0) to [open, v^=$k_b U~~$,*-*] ++(0,4);
+    \draw (T3.B1) |- (10,4) to[short, i=$i$] ++(3,0) to [open,v^>=$U$,o-o] ++ (0,-4) -|  (T3.B2);
+    \draw (11.2,0) to [C, l =$C_0$] ++(0,4);
+    \draw (12.5,0) to [R, l =$Z_{ei}$] ++(0,4);
+    
+    \end{circuitikz}
