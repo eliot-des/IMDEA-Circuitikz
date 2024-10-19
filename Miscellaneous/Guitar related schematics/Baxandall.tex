@@ -1,0 +1,43 @@
+\begin{circuitikz}[scale=0.9, transform shape, european, straight voltages] 
+    \ctikzset{inductor=cute}
+    %\draw[help lines] (-2,-2) grid (9,6);
+    %\path (8,-0.6) rectangle (11,6.6);
+    \draw (0.5,0) node[ground]{} to [V,v=$V_{in}$,-*] ++(0,6) node[above]{\circled{1}}
+    to [C,l=$C_1$,-*] ++(1.5,0) node[above]{\circled{2}} to [R,l_=$R_1$,-*] ++(0,-1.75) node[left]{\circled{3}} 
+    to [potentiometer,l_=$P_B$,-*, n=bass] ++(0,-2.5) node[left]{\circled{5}}
+    to [R,l_=$R_2$] ++(0,-1.75) node[ground]{};
+    
+    \draw (2,6) -- (6.5,6) to
+    [C,l=$C_4$,-*] ++(0,-1.75) node[right]{\circled{7}} 
+    to [potentiometer,mirror,l=$P_T$,-*, n=treble] ++(0,-2.5) node[right]{\circled{8}}
+    to [C,l=$C_5$] ++(0,-1.75) node[ground]{};
+    
+    \draw (bass.wiper) to [short] (3.5,3)node[above left]{\circled{4}} to
+    [R,l_=$R_3$,*-*] ++(2,0) node[above]{\circled{6}} -- (treble.wiper);
+    \draw (2,1.75) to [C,l=$C_3$] ++(1.5,0) -- ++(0,2.5)
+    to [C,l_=$C_2$] ++(-1.5,0);
+    
+    \draw (5.5,0) node[ground]{} to [open,v^>=$V_{out}$~~~~, o-o] ++ (0,1.75) -- ++(0,1.25);
+    
+    
+    \draw[->] (-0.5,4.75) -- (1.5,3.5);
+    \begin{scope}[shift={(-1.25,5.5)}]
+        \ctikzset{scale=0.8}
+        \draw (0.25,0) ellipse (1 and 1.3);
+        \draw (0,0) to[R, l_=$P_B^+$,*-] ++(0,1.26);
+        \draw (0,0) to[R, l=$P_B^-$] ++(0,-1.25);
+        \draw (0,0) -- ++(1.25,0);
+        \node at (0.25,-1.75) {\begin{tabular}{c}Bass pot.\\detail\end{tabular}};
+      \end{scope}
+    
+        
+      \draw[->] (7.75,2) -- ++(-0.5,0.5);  
+      \begin{scope}[shift={(8.25,1.5)}]
+          \ctikzset{scale=0.8}
+          \draw (0.25,0) ellipse (1 and 1.3);
+          \draw (0.5,0) to[R, l=$P_T^+$,*-] ++(0,1.26);
+          \draw (0.5,0) to[R, l_=$P_T^-$] ++(0,-1.25);
+          \draw (0.5,0) -- ++(-1.25,0);
+          \node at (0.25,-1.75) {\begin{tabular}{c}Treble pot.\\detail\end{tabular}};
+        \end{scope}
+    \end{circuitikz}
