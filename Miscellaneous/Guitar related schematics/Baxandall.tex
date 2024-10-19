@@ -1,3 +1,6 @@
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}}
+
 \begin{circuitikz}[scale=0.9, transform shape, european, straight voltages] 
     \ctikzset{inductor=cute}
     %\draw[help lines] (-2,-2) grid (9,6);
