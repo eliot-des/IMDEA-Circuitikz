@@ -1,0 +1,42 @@
+\begin{circuitikz}[scale=0.7, transform shape, european, straight voltages]
+
+    %\draw [help lines] (0,0) grid (12,12);
+    \draw (-1,5.5) node[op amp, noinv input up] (opamp1) {\texttt{AOP 1}};
+    \draw (5,5) node[op amp] (opamp2) {\texttt{AOP 2}};
+    \draw (11,4.5) node[op amp] (opamp3) {\texttt{AOP 3}};
+
+    \draw (opamp1.up) to [short,-o] +(0,0.35) node[right]{$+V_{cc}$};
+    \draw (opamp1.down) to [short,-o] +(0,-0.35) node[right]{$-V_{cc}$};
+    
+    \draw (opamp2.up) to [short,-o] +(0,0.35) node[right]{$+V_{cc}$};
+    \draw (opamp2.down) to [short,-o] +(0,-0.35) node[right]{$-V_{cc}$};
+
+
+    \draw (opamp3.up) to [short,-o] +(0,0.35) node[right]{$+V_{cc}$};
+    \draw (opamp3.down) to [short,-o] +(0,-0.35) node[right]{$-V_{cc}$};
+    
+
+    \draw (opamp1.-) -- ++(-0.5,0) to [R,l_=$R_9$,a^=\SI{1}{\kohm}] ++(0,-2.5) node[tlground]{};
+    \draw (opamp2.+) -- ++(-0.5,0) to [R,l_=$R_5$,a^=\SI{1.5}{\kohm}] ++(0,-2) node[tlground]{};
+    \draw (opamp3.+) -- ++(-0.5,0) to [R,l_=$R_8$,a^=\SI{10}{\kohm}] ++(0,-1.5) node[tlground]{};
+
+
+    \draw (opamp1.+) to[short,*-] ++(0,1.5) coordinate (leftR1)
+        to[R, l=$R_3$,a_=\SI{2.2}{\kohm}] (leftR1 -| opamp1.out) -- (opamp1.out);
+    \draw (opamp1.+) to [R, l_=$R_4$, a^=\SI{1}{\kohm}] ++(-2,0) -- ++(0,4) -- ++(11.2,0) -- ++(0,-5);
+
+    \draw (opamp2.-) [short, -o] to [R, l_=$R_1$, a^=\SI{1.5}{\kohm}] ++(-2.25,0) node[above]{$V_{square}$} to [short,-*] (opamp1.out);
+    \draw (opamp2.-) to[short,*-] ++(0,1.5) coordinate (leftC)
+        to[C,l=$C_1$,a_=\SI{100}{\nano\farad}] (leftC -| opamp2.out);
+    \draw (opamp2.out) to [short] +(0.82,0) node[below]{$V_{ramp}$};
+    \draw (leftC) to[short] ++(0,1.75) coordinate (leftR2) to [R,l^=$R_2$, a_=\SI{100}{\kohm}] (leftR2-| opamp2.out) to[short,-*] (opamp2.out);
+
+
+    \draw (opamp3.-) to[short,*-] ++(0,1.5) coordinate (leftC2)
+        to[C,l=$C_2$,a_=\SI{10}{\nano\farad}] (leftC2 -| opamp3.out);
+    \draw (opamp3.out) to [short,-o] +(0.82,0) node[below]{$V_{sinus}$};
+    \draw (leftC2) to[short] ++(0,1.75) coordinate (leftR3) to [R,l^=$R_7$, a_=\SI{100}{\kohm}] (leftR3-| opamp3.out) to[short,-*] (opamp3.out);
+
+    
+    \draw (7,5) [short,o-]  to [R, l=$R_6$,a=\SI{10}{\kohm}] (opamp3.-);
+\end{circuitikz}

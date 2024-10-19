@@ -1,0 +1,34 @@
+\begin{circuitikz}[scale=0.8, transform shape, european, straight voltages]
+%\draw [help lines] (0,0) grid (10,10);
+
+\draw (5,5) node[op amp] (opamp) {};
+\draw (opamp.up) to [short,-o] +(0,0.5) node[right]{$+V_{cc}$};
+\draw (opamp.down) to [short,-o] +(0,-0.5) node[right]{$-V_{cc}$};
+\draw (opamp.+) to [R,l_=$R_c$] +(0,-2) node[tlground]{};
+
+
+\draw (opamp.-) to [C,l_=$C_1$] ++(-2,0) [short,-o]
+to [R, l_=$R_1$] ++(-2,0) coordinate(leftR) node[left]{$V_e$};
+\draw (leftR) +(0,-2.5)  node[ocirc] {} -- +(0,-3) node[tlground]{};
+
+\draw (opamp.-) to[short,*-] ++(0,1.5) coordinate (leftC)
+    to[C,l=$C_2$] (leftC -| opamp.out);
+\draw (opamp.out) to [short,-o] +(1,0) node[right]{$V_{s}$};
+\draw (leftC) to[short] ++(0,1.25) coordinate (leftR) to [R,l=$R_2$]
+        (leftR-| opamp.out) to[short,-*] (opamp.out);
+
+
+
+
+\draw (opamp.out) +(1,-2) node[ocirc]{} -- +(1,-2.5) node[tlground]{};
+
+
+\node[shift={(0,-0.3)}] at (opamp.-) {\scriptsize$A$};
+
+
+
+\draw[red,thick] (0.1,5) rectangle (3.4,6.4);
+\node[align=center,text=red] at (1.75,6.75){\textbf{$Z_{th}$}};
+    \draw[mygreen!90,thick] (3.5,6.5) rectangle (6.5,9);
+\node[align=center,text=mygreen!90] at (7,7.75){\textbf{$Z_{eq}$}};
+\end{circuitikz}
